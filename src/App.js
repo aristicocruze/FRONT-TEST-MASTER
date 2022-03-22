@@ -1,5 +1,15 @@
-function App() {
-  return <>App</>;
-}
+// Home page
+// Header component
+// Post component
 
-export default App;
+// Hooks
+// infinite scroll
+import Home from "./pages/Home";
+
+export default function App() {
+  return (
+    <>
+      <Home />
+    </>
+  );
+}
