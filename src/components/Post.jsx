@@ -11,14 +11,14 @@ export default function Post({ post }) {
       setLikeCount(post.likes_count);
     };
     initialState();
-  }, [post]);
+  }, [post]); // Verificar esto ya que ocaciona re-renderizados.
 
   const handleLikes = () => {};
 
-  //console.log(`id:${post.id}, like state: ${like}, likeCount: ${likeCount}`);
   return (
     <div style={{ margin: "20px" }}>
       <h2>{`Autor: ${post.author}`}</h2>
+      <h2>{`Titulo: ${post.title}`}</h2>
       <h2>{`id: ${post.id}`}</h2>
 
       <h2>{`liked? ${like}`}</h2>

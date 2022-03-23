@@ -1,27 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import axios from "axios";
+//import axios from "axios";
 
 import Header from "../components/Header";
 import Post from "../components/Post";
 
+import useImageSearch from "../hooks/useImageSearch";
+
 export default function Home() {
-  const [post, setPost] = useState(null);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const { post, loading, error, hasMore } = useImageSearch(search, page);
 
-  // This will be in a custom hook
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await axios.get("http://localhost:3100/images");
-      setPost(res.data);
-    };
-    fetchPosts();
-  }, []);
+  const handleSearch = e => {
+    setSearch(e.target.value);
+    setPage(1);
+  };
+  // Custom Hook.
 
-  console.log(post);
   return (
     <div>
       <Header />
       {/* Render posts */}
+      <input
+        type="text"
+        placeholder="Search by Autor or Title"
+        onChange={handleSearch}
+      />
+      {loading && "Loading..."}
+      {error && "Error..."}
       {post && post.map(post => <Post key={post.id} post={post} />)}
     </div>
   );
