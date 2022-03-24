@@ -7,6 +7,11 @@ export default function useImageSearch(search, page) {
   const [error, setError] = useState(false);
   const [hasMore, setHasMore] = useState(false);
 
+  // Reset posts for every search
+  useEffect(() => {
+    setPost([]);
+  }, [search]);
+
   useEffect(() => {
     setLoading(true);
     setError(false);
@@ -20,12 +25,14 @@ export default function useImageSearch(search, page) {
     })
       .then(res => {
         setPost(prevPost => {
-          //return [...prevPost, res.data];
-          return res.data.filter(
-            post =>
-              post.author.toLowerCase().includes(search.toLowerCase()) ||
-              post.title.toLowerCase().includes(search.toLowerCase())
-          );
+          return [
+            ...prevPost,
+            ...res.data.filter(
+              post =>
+                post.author.toLowerCase().includes(search.toLowerCase()) ||
+                post.title.toLowerCase().includes(search.toLowerCase())
+            ),
+          ];
         });
         setHasMore(res.data.length > 0);
         setLoading(false);

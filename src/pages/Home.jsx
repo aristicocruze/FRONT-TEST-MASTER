@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-//import axios from "axios";
+import { useState, useCallback } from "react";
 
 import Header from "../components/Header";
 import Post from "../components/Post";
@@ -10,6 +8,7 @@ import useImageSearch from "../hooks/useImageSearch";
 export default function Home() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+
   const { post, loading, error, hasMore } = useImageSearch(search, page);
 
   const handleSearch = e => {
@@ -25,6 +24,7 @@ export default function Home() {
       <input
         type="text"
         placeholder="Search by Autor or Title"
+        value={search}
         onChange={handleSearch}
       />
       {loading && "Loading..."}
