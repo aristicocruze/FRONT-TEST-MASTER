@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
-import Header from "../components/Header";
-import Post from "../components/Post";
+import Header from "../components/header/Header";
+import Post from "../components/post/Post";
 
 import useImageSearch from "../hooks/useImageSearch";
 
@@ -21,12 +21,12 @@ export default function Home() {
     <div>
       <Header />
       {/* Render posts */}
-      <input
+      {/* <input
         type="text"
         placeholder="Search by Autor or Title"
         value={search}
         onChange={handleSearch}
-      />
+      /> */}
       {loading && "Loading..."}
       {error && "Error..."}
       {post && post.map(post => <Post key={post.id} post={post} />)}
