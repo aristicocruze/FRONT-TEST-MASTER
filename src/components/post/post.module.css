@@ -46,4 +46,31 @@
 }
 
 .postBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  bottom: 0;
+  height: 125px;
+  width: 100%;
+  background-color: #fff;
+}
+
+.title {
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.author {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.likesContainer {
+  background-color: aquamarine;
+  height: 50px;
+  width: 100%;
 }

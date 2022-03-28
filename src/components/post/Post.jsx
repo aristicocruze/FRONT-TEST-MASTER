@@ -34,27 +34,28 @@ export default function Post({ post, xref }) {
           className={styles.img}
         />
       </div>
-      <div className={styles.postBottom}>bottom</div>
+      <div className={styles.postBottom}>
+        <h1 className={styles.title}>{post.title}</h1>
+        <h1 className={styles.author}>by {post.author}</h1>
+        <div
+          className={styles.likesContainer}
+        >{`Likes: ${post.likes_count}`}</div>
+      </div>
     </div>
   );
 }
 
-{
-  /* <span>{`Price: ${post.price}`}</span>
+/* <span>{`Price: ${post.price}`}</span>
 <img className={styles.img} src={post.main_attachment.small} alt="" />
 <h2>{`Titulo: ${post.title}`}</h2>
 <h2>{`by ${post.author}`}</h2>
 <h2>{`Likes: ${post.likes_count}`}</h2>
 {/* <h2>{`id: ${post.id}`}</h2> */
-}
 
-{
-  /* <h2>{`liked? ${like}`}</h2>
+/* <h2>{`liked? ${like}`}</h2>
 
 <button onClick={() => setLike(!like)}>{`${like}`}</button>
 
 {/* Render big image in PC view */
-}
-{
-  /* <img src={post.main_attachment.big} alt="" />  */
-}
+
+/* <img src={post.main_attachment.big} alt="" />  */
