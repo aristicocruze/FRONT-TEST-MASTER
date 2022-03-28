@@ -7,7 +7,24 @@
   background-color: #fff;
 }
 
-.search {
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 25px;
+}
+
+.searchIcon {
+  display: flex;
+  left: 20px;
+  position: absolute;
+  z-index: 1;
+  font-size: 18px;
+}
+
+.searchInput {
   width: 200px;
   height: 25px;
   border-radius: 25px;
