@@ -7,7 +7,6 @@ export default function useImageSearch(search, page) {
   const [error, setError] = useState(false);
   const [hasMore, setHasMore] = useState(false);
 
-  // Reset posts for every search
   useEffect(() => {
     setPost([]);
   }, [search]);
@@ -16,12 +15,10 @@ export default function useImageSearch(search, page) {
     setLoading(true);
     setError(false);
 
-    let cancel;
     axios({
       method: "get",
       url: "http://localhost:3100/images",
       params: { search, page },
-      cancelToken: new axios.CancelToken(c => (cancel = c)),
     })
       .then(res => {
         setPost(prevPost => {
@@ -41,7 +38,6 @@ export default function useImageSearch(search, page) {
         if (axios.isCancel(e)) return;
         setError(true);
       });
-    return () => cancel();
   }, [search, page]);
 
   return { post, loading, error, hasMore };

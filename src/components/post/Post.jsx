@@ -1,21 +1,35 @@
 import { useState, useEffect } from "react";
 import styles from "./post.module.css";
 import { AiTwotoneLike } from "react-icons/ai";
+import { MdRefresh } from "react-icons/md";
+import axios from "axios";
 
 export default function Post({ post, xref }) {
-  // saved if liked and likes_count in state to manipulate.
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  const [error, setError] = useState(false);
 
+  // initial state of post
   useEffect(() => {
-    const initialState = () => {
-      // setLike(post.liked);
-      // setLikeCount(post.likes_count);
-    };
-    initialState();
-  }, []); // Verificar esto ya que ocaciona re-renderizados.
+    setLike(post.liked);
+    setLikeCount(post.likes_count);
+  }, []);
 
-  const handleLikes = () => {};
+  const handleLikes = async () => {
+    try {
+      const res = await axios.post(
+        `http://localhost:3100/images/${post.id}/likes`
+      );
+      if (res.status === 204) {
+        console.log(res.status);
+        setLike(!like);
+        setLikeCount(like ? likeCount - 1 : likeCount + 1);
+      }
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
+  };
 
   const converIntToCurrency = num => {
     return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
@@ -39,31 +53,23 @@ export default function Post({ post, xref }) {
         <h1 className={styles.title}>{post.title}</h1>
         <h1 className={styles.author}>by {post.author}</h1>
         <div className={styles.likesContainer}>
-          <div className={styles.likesBox}>
-            <AiTwotoneLike />
-            {`Likes: ${post.likes_count}`}
+          <div className={styles.likes} onClick={handleLikes}>
+            {likeCount}
+            <div
+              className={`${styles.iconContainer} ${like && styles.likedPost}`}
+            >
+              <AiTwotoneLike />
+            </div>
           </div>
-          <div className={styles.likesBox}>
-            <AiTwotoneLike />
-            {`Likes: ${post.likes_count}`}
+          <div className={styles.likes}>
+            {error && <span>Error when liking post</span>}
+            <div className={styles.iconContainer}>
+              <MdRefresh />
+            </div>
+            000
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-/* <span>{`Price: ${post.price}`}</span>
-<img className={styles.img} src={post.main_attachment.small} alt="" />
-<h2>{`Titulo: ${post.title}`}</h2>
-<h2>{`by ${post.author}`}</h2>
-<h2>{`Likes: ${post.likes_count}`}</h2>
-{/* <h2>{`id: ${post.id}`}</h2> */
-
-/* <h2>{`liked? ${like}`}</h2>
-
-<button onClick={() => setLike(!like)}>{`${like}`}</button>
-
-{/* Render big image in PC view */
-
-/* <img src={post.main_attachment.big} alt="" />  */

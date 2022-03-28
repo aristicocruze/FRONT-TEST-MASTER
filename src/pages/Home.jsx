@@ -41,15 +41,19 @@ export default function Home() {
 
       {loading && "Loading..."}
       {error && "Error..."}
-      {post &&
-        post.map((posts, index) => {
-          if (post.length === index + 1) {
-            // This is the last post, gets the reference to it.
-            return <Post xref={lastPostElementRef} key={index} post={posts} />;
-          } else {
-            return <Post key={index} post={posts} />;
-          }
-        })}
+      <div className={styles.postContainer}>
+        {post &&
+          post.map((posts, index) => {
+            if (post.length === index + 1) {
+              // This is the last post, gets the reference to it.
+              return (
+                <Post xref={lastPostElementRef} key={index} post={posts} />
+              );
+            } else {
+              return <Post key={index} post={posts} />;
+            }
+          })}
+      </div>
     </div>
   );
 }

@@ -1,8 +1,18 @@
 .home {
   background-color: #f5f5f5;
-  display: flex;
   height: 100%;
+  width: 100vw;
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.postContainer {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 70vw;
 }
