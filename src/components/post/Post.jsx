@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./post.module.css";
+import { AiTwotoneLike } from "react-icons/ai";
 
 export default function Post({ post, xref }) {
   // saved if liked and likes_count in state to manipulate.
@@ -37,9 +38,16 @@ export default function Post({ post, xref }) {
       <div className={styles.postBottom}>
         <h1 className={styles.title}>{post.title}</h1>
         <h1 className={styles.author}>by {post.author}</h1>
-        <div
-          className={styles.likesContainer}
-        >{`Likes: ${post.likes_count}`}</div>
+        <div className={styles.likesContainer}>
+          <div className={styles.likesBox}>
+            <AiTwotoneLike />
+            {`Likes: ${post.likes_count}`}
+          </div>
+          <div className={styles.likesBox}>
+            <AiTwotoneLike />
+            {`Likes: ${post.likes_count}`}
+          </div>
+        </div>
       </div>
     </div>
   );
