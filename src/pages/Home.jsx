@@ -1,5 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 
+import styles from "./home.module.css";
 import Header from "../components/header/Header";
 import Post from "../components/post/Post";
 
@@ -9,27 +10,46 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
+  // Custom Hook.
   const { post, loading, error, hasMore } = useImageSearch(search, page);
+
+  const observer = useRef();
+  const lastPostElementRef = useCallback(
+    node => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && hasMore) {
+          console.log("Last post is visible");
+          setPage(prev => prev + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
 
   const handleSearch = e => {
     setSearch(e.target.value);
     setPage(1);
   };
-  // Custom Hook.
 
   return (
-    <div>
-      <Header />
+    <div className={styles.home}>
+      <Header handleSearch={handleSearch} />
       {/* Render posts */}
-      {/* <input
-        type="text"
-        placeholder="Search by Autor or Title"
-        value={search}
-        onChange={handleSearch}
-      /> */}
+
       {loading && "Loading..."}
       {error && "Error..."}
-      {post && post.map(post => <Post key={post.id} post={post} />)}
+      {post &&
+        post.map((posts, index) => {
+          if (post.length === index + 1) {
+            // This is the last post, gets the reference to it.
+            return <Post xref={lastPostElementRef} key={index} post={posts} />;
+          } else {
+            return <Post key={index} post={posts} />;
+          }
+        })}
     </div>
   );
 }

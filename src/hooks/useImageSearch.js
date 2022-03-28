@@ -18,7 +18,7 @@ export default function useImageSearch(search, page) {
 
     let cancel;
     axios({
-      method: "GET",
+      method: "get",
       url: "http://localhost:3100/images",
       params: { search, page },
       cancelToken: new axios.CancelToken(c => (cancel = c)),

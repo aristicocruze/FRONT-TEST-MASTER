@@ -1,0 +1,49 @@
+.post {
+  height: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.postTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.priceContainer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 200px;
+  width: 220px;
+  display: flex;
+  background-color: #fff;
+  clip-path: polygon(50% 0%, 0 0, 0 44%);
+}
+
+.price {
+  margin-top: 15px;
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.price > small {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+}
+
+.postBottom {
+}
