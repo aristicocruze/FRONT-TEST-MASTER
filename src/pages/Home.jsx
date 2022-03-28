@@ -38,7 +38,6 @@ export default function Home() {
     <div className={styles.home}>
       <Header handleSearch={handleSearch} />
       {/* Render posts */}
-
       {loading && "Loading..."}
       {error && "Error..."}
       <div className={styles.postContainer}>

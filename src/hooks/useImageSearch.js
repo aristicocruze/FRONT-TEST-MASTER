@@ -35,7 +35,6 @@ export default function useImageSearch(search, page) {
         setLoading(false);
       })
       .catch(e => {
-        if (axios.isCancel(e)) return;
         setError(true);
       });
   }, [search, page]);
